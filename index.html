@@ -2,108 +2,67 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>12 Days Spin Wheel</title>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+  <title>Spin the Wheel</title>
   <script src="https://cdn.jsdelivr.net/npm/winwheel@2.8.0/Winwheel.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
   <style>
     body {
-      margin: 0;
-      background: #a30000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+      background-color: #a30000;
+      color: white;
       font-family: sans-serif;
-      color: #fff;
+      text-align: center;
+      padding: 20px;
     }
     #canvas {
-      background: #fff;
+      background: white;
       border-radius: 50%;
     }
-    #winner {
-      font-size: 2rem;
-      margin-top: 20px;
-    }
     #spinBtn {
-      margin-top: 30px;
-      padding: 12px 24px;
+      margin-top: 20px;
+      padding: 10px 20px;
       font-size: 1.2rem;
-      background: #fff;
+      background-color: white;
       color: #a30000;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      font-weight: bold;
-    }
-    #spinBtn:hover {
-      background: #f2f2f2;
-    }
-    #pointer {
-      width: 0;
-      height: 0;
-      border-left: 20px solid transparent;
-      border-right: 20px solid transparent;
-      border-bottom: 30px solid #fff;
-      position: absolute;
-      top: 10px;
     }
   </style>
 </head>
 <body>
-  <div id="pointer"></div>
   <canvas id="canvas" width="500" height="500"></canvas>
   <div id="winner">Ready to spin!</div>
   <button id="spinBtn">🎁 Spin Now</button>
 
   <script>
     const names = [
-      "Holly Hatfield", "Patrick Menye", "Govinda Govinda",
-      "Marcin Bojke", "Alec Hunt", "Robyn Gregg Buen",
-      "Sarah Foster", "Andy Gosden", "Ben McGrath",
-      "Dominic McClean", "Emma Seaton", "Jamie Johnson"
+      "Holly Hatfield",
+      "Patrick Menye",
+      "Govinda Govinda",
+      "Marcin Bojke",
+      "Alec Hunt",
+      "Elzbieta Matysiak",
+      "Ben Smith"
     ];
 
-    let wheel;
-
-    function createWheel() {
-      wheel = new Winwheel({
-        canvasId: 'canvas',
-        numSegments: names.length,
-        segments: names.map(name => ({ text: name })),
-        textFontSize: 14,
-        textAlignment: 'outer',
-        textOrientation: 'horizontal',
-        animation: {
-          type: 'spinToStop',
-          duration: 8,
-          spins: 5,
-          callbackFinished: segment => {
-            document.getElementById('winner').textContent = `🎉 Winner: ${segment.text}`;
-          }
+    let wheel = new Winwheel({
+      canvasId: 'canvas',
+      numSegments: names.length,
+      textFontSize: 16,
+      segments: names.map(name => ({ text: name })),
+      animation: {
+        type: 'spinToStop',
+        duration: 5,
+        spins: 5,
+        callbackFinished: (segment) => {
+          document.getElementById('winner').textContent = `🎉 Winner: ${segment.text}`;
         }
-      });
-    }
+      }
+    });
 
-    // Initialize
-    window.onload = () => {
-      createWheel();
-
-      document.getElementById('spinBtn').addEventListener('click', () => {
-        wheel.startAnimation();
-      });
-
-      // Auto-spin at 12:00 PM
-      setInterval(() => {
-        const now = new Date();
-        if (now.getHours() === 12 && now.getMinutes() === 0 && now.getSeconds() === 0) {
-          if (localStorage.getItem('wheelSpun') !== now.toDateString()) {
-            wheel.startAnimation();
-            localStorage.setItem('wheelSpun', now.toDateString());
-          }
-        }
-      }, 1000);
-    };
+    document.getElementById('spinBtn').addEventListener('click', () => {
+      wheel.startAnimation();
+    });
   </script>
 </body>
 </html>
