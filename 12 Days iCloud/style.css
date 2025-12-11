@@ -1,0 +1,50 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  background: url('your-background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
+}
+
+.container {
+  margin-top: 50px;
+}
+
+.wheel-container {
+  position: relative;
+  display: inline-block;
+}
+
+.pointer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 30px solid red;
+  transform: translate(-50%, -220px);
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 25px;
+  font-size: 18px;
+  border: none;
+  background-color: #ff5555;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #ff7777;
+}
+
+#result {
+  margin-top: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
